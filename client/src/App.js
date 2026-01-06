@@ -7,7 +7,6 @@ import './App.css';
 function App() {
   const [entries, setEntries] = useState([]);
   const [filterMood, setFilterMood] = useState('');
-  const [sortOrder, setSortOrder] = useState('desc'); // DEFAULT: newest first
 
   const fetchEntries = async (mood = '') => {
     let url = 'http://localhost:5000/entries';
@@ -44,15 +43,13 @@ function App() {
 
   // SORT desc or asc
   const handleSort = (order) => {
-  setSortOrder(order);
   const sorted = [...entries].sort((a, b) => {
     const dateA = new Date(a.entry_date);
     const dateB = new Date(b.entry_date);
     return order === "asc" ? dateA - dateB : dateB - dateA;
   });
   setEntries(sorted);
-};
-
+  };
 
   return (
     <div className='App'>
