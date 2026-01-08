@@ -1,0 +1,213 @@
+:root {
+  /* COLORS */
+  --color-accent: #cf9fff; /* Light Violet - accent, buttons */
+  --color-link-hover: #ffbf00; /* Amber - link hover */
+  --color-light-font: #36454f; /* Charcoal - font in light mode */
+  --color-dark-font: #E5E4E2; /* Platinum - font in dark mode */
+  --color-sub-font: #848884; /* Smoke - subtext */
+
+  /* GLASS GRADIENTS */
+  --glass-light-top: rgba(255, 255, 255, 0.5);
+  --glass-light-bottom: rgba(255, 255, 255, 0.3);
+  --glass-dark-top: rgba(30, 30, 35, 0.75);
+  --glass-dark-bottom: rgba(20, 20, 25, 0.55);
+
+  /* GLASS BORDERS AND SHADOWS */
+  --glass-border-light: rgba(255, 255, 255, 0.3);
+  --glass-shadow-light: rgba(0, 0, 0, 0.08);
+  --glass-inset-light: rgba(255, 255, 255, 0.3);
+
+  --glass-border-dark: rgba(255, 255, 255, 0.1);
+  --glass-shadow-dark: rgba(0, 0, 0, 0.4);
+  --glass-inset-dark: rgba(255, 255, 255, 0.08);
+
+  /* FONTS */
+  --font-logo: 'Playwrite PL', serif;
+  --font-header: 'Comfortaa', serif;
+  --font-body: 'Figtree', sans-serif;
+  --font-footer: 'Nunito', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* FONT IMPORT */
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Figtree:ital,wght@0,300..900;1,300..900&family=Gluten:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Playwrite+PL:wght@100..400&display=swap');
+
+#root {
+  min-height: 100vh;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+html {
+  font-size: 18px;
+}
+
+body {
+  text-align: center;
+  font-family: var(--font-body);
+  color: var(--color-light-font);
+}
+
+body.dark {
+  color: var(--color-dark-font);
+}
+
+/* BACKGROUND */
+.Background {
+  background-image: url('/public/images/background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+.BackgroundOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    to bottom,
+    var(--glass-light-top),
+    var(--glass-light-bottom)
+  );
+}
+
+body.dark .BackgroundOverlay {
+  background: linear-gradient(
+    to bottom,
+    var(--glass-dark-top),
+    var(--glass-dark-bottom)
+  );
+}
+
+/* LIGHT GLASS CARD */
+.glass-card {
+  background: linear-gradient(
+    to bottom,
+    var(--glass-light-top),
+    var(--glass-light-bottom)
+  );
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border-light);
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow:
+    0 8px 24px var(--glass-shadow-light),
+    inset 0 1px var(--glass-inset-light);
+}
+
+/* DARK GLASS CARD */
+body.dark .glass-card {
+  background: linear-gradient(
+    to bottom,
+    var(--glass-dark-top),
+    var(--glass-dark-bottom)
+  );
+  border: 1px solid var(--glass-border-dark);
+  box-shadow:
+    0 8px 24px var(--glass-shadow-dark),
+    inset 0 1px var(--glass-inset-dark);
+}
+
+/* SONNER (toaster) OVERRIDES */
+[data-sonner-toaster] {
+  text-align: left;
+  font-family: var(--font-body);
+}
+
+[data-sonner-toast] {
+  align-items: flex-start !important;
+  background: linear-gradient(
+    to bottom,
+    var(--glass-light-top),
+    var(--glass-light-bottom)
+  ) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border-light);
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow:
+    0 8px 24px var(--glass-shadow-light),
+    inset 0 1px var(--glass-inset-light);
+}
+
+body.dark [data-sonner-toast] {
+  background: linear-gradient(
+    to bottom,
+    var(--glass-dark-top),
+    var(--glass-dark-bottom)
+  ) !important;
+  border: 1px solid var(--glass-border-dark);
+  box-shadow:
+    0 8px 24px var(--glass-shadow-dark),
+    inset 0 1px var(--glass-inset-dark);
+}
+
+[data-sonner-toast] [data-title], [data-sonner-toast] [data-description],  [data-sonner-toast] [data-icon] {
+  color: #000000;
+  font-size: 0.8rem;
+}
+
+body.dark [data-sonner-toast] [data-title], body.dark [data-sonner-toast] [data-description], body.dark [data-sonner-toast] [data-icon] {
+  color: #FFFFFF;
+}
+
+[data-sonner-toast] [data-icon] {
+  font-size: 1.5rem;
+  margin-top: 0.2rem;
+  margin-right: 0.8rem;
+}
+
+/* HEADER*/
+header.glass-card {
+  border-radius: 0px;
+}
+
+.HeaderContainer {
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+  align-items: center;
+  font-family: var(--font-logo);
+}
+
+.HeaderContainer p {
+  font-family: var(--font-header);
+  color: var(--color-sub-font);
+  font-size: 0.8rem;
+  text-align: right;
+  margin-right: 0.5rem;
+}
+
+.LogoIcon {
+  color: var(--color-accent);
+}
+
+.HeaderContainer button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+}
+
+body.dark .HeaderContainer button {
+    color: var(--color-dark-font);
+}
+
+.HeaderContainer button:hover, body.dark .HeaderContainer button:hover {
+    color: var(--color-link-hover);
+    transition: all 0.3s ease-in-out;
+}

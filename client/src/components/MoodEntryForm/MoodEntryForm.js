@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { moodOptions } from '../moods';
+import { moodOptions } from '../MoodSelector/MoodSelector';
 
-export default function EntryForm({ onAdd }) {
+export default function MoodEntryForm({ onAdd }) {
   const [entryDate, setEntryDate] = useState('');
   const [mood, setMood] = useState(4);
   const [feeling, setFeeling] = useState('');

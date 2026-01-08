@@ -1,7 +1,7 @@
 import React from "react";
-import { moodOptions } from '../moods';
+import { moodOptions } from '../MoodSelector/MoodSelector';
 
-export default function EntryItem({ entry, onDelete }) {
+export default function MoodEntry({ entry, onDelete }) {
   const moodLabel = moodOptions.find((m) => m.value === entry.mood)?.label || entry.mood;
 
 return (

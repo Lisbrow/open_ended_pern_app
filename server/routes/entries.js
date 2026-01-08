@@ -14,8 +14,8 @@ router.post("/", async (req, res) => {
       });
     }
 
-    if (mood < 1 || mood > 7) {
-      return res.status(400).json({ error: "mood must be between 1 and 7" });
+    if (mood < 1 || mood > 5) {
+      return res.status(400).json({ error: "mood must be between 1 and 5" });
     }
 
     const result = await pool.query(
