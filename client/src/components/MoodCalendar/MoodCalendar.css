@@ -1,0 +1,78 @@
+.MoodCalendar {
+  width: 100%;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+/* Header */
+.CalendarHeader {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 0.25rem;
+}
+
+.CalendarHeaderCell {
+  text-align: center;
+  font-weight: 600;
+  color: var(--color-sub-font);
+  padding-bottom: 0.25rem;
+}
+
+/* Grid */
+.CalendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.35rem;
+}
+
+/* Cell */
+.CalendarCell {
+  min-height: 88px;
+  padding: 0.4rem;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition:
+    background 0.2s ease,
+    border 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* TODAY — border-based indicator */
+.CalendarCell.today {
+  border: 2px solid #FFD700;
+  box-shadow: 0 0 6px rgba(255, 215, 0, 0.45);
+  background: rgba(255, 215, 0, 0.08);
+}
+
+/* Date */
+.CalendarDate {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+/* Emojis */
+.CalendarEmojis {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem;
+  justify-content: center;
+}
+
+.CalendarEmoji {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0;
+  transition: transform 0.15s ease;
+}
+
+.CalendarEmoji:hover {
+  transform: scale(1.2);
+}

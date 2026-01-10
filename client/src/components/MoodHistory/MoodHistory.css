@@ -1,0 +1,77 @@
+/* History Header */
+.HistoryTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* List container */
+.HistoryList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* Individual history card */
+.HistoryCard {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 0.5rem;
+  transition: box-shadow 0.3s, border 0.3s;
+}
+
+/* Highlighted entry */
+.HistoryCard.highlighted {
+  border: 2px solid #FFD700;
+  box-shadow: 0 0 8px 3px #FFD700;
+  transition: box-shadow 0.4s, border 0.4s;
+}
+
+/* Emoji section */
+.HistoryEmoji {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+/* Text content */
+.HistoryText {
+  flex: 1;
+  text-align: left;
+}
+
+/* Meta info (date, etc.) */
+.HistoryMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--color-sub-font);
+}
+
+/* Note / extra text */
+.HistoryNote {
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--color-sub-font);
+}
+
+/* Delete button */
+.DeleteButton {
+  opacity: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #f87171;
+  transition: opacity 0.2s ease;
+}
+
+.HistoryCard:hover .DeleteButton {
+  opacity: 1;
+}

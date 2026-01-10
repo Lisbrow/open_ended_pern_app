@@ -1,0 +1,27 @@
+.MoodInsights {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.MoodInsights span {
+  color: var(--color-light-font)
+}
+
+body.dark .MoodInsights span {
+  color: var(--color-dark-font)
+}
+
+.AvgMood {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+
+.AvgEmoji {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+

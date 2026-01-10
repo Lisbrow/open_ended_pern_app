@@ -6,24 +6,20 @@ const router = express.Router();
 // POST /entries
 router.post("/", async (req, res) => {
   try {
-    const { entry_date, mood, feeling, reflection } = req.body;
+    const { mood_value, mood_score, entry_text } = req.body;
 
-    if (!entry_date || !mood || !feeling) {
+    if (!mood_value || !mood_score) {
       return res.status(400).json({
-        error: "entry_date, mood, and feeling are required",
+        error: "mood_value and mood_score are required",
       });
     }
 
-    if (mood < 1 || mood > 5) {
-      return res.status(400).json({ error: "mood must be between 1 and 5" });
-    }
-
     const result = await pool.query(
-      `INSERT INTO journal_entries 
-        (entry_date, mood, feeling, reflection)
-       VALUES ($1, $2, $3, $4) 
+      `INSERT INTO mood_entries
+        (mood_value, mood_score, entry_text)
+       VALUES ($1, $2, $3)
        RETURNING *`,
-      [entry_date, mood, feeling, reflection]
+      [mood_value, mood_score, entry_text]
     );
 
     res.status(201).json(result.rows[0]);
@@ -38,7 +34,7 @@ router.get("/", async (req, res) => {
   try {
     const { mood } = req.query;
 
-    let query = `SELECT * FROM journal_entries`;
+    let query = `SELECT * FROM mood_entries`;
     let values = [];
 
     if (mood) {
@@ -46,7 +42,7 @@ router.get("/", async (req, res) => {
       values.push(mood);
     }
 
-    query += " ORDER BY entry_date DESC";
+    query += " ORDER BY created_at DESC";
 
     const result = await pool.query(query, values);
     res.json(result.rows);
@@ -66,7 +62,7 @@ router.delete("/:id", async (req, res) => {
     }
 
     const result = await pool.query(
-      "DELETE FROM journal_entries WHERE id = $1 RETURNING *",
+      "DELETE FROM mood_entries WHERE id = $1 RETURNING *",
       [id]
     );
 

@@ -1,6 +1,7 @@
 :root {
   /* COLORS */
   --color-accent: #cf9fff; /* Light Violet - accent, buttons */
+  --color-highlight: rgba(207, 159, 255, 0.3); /* Light Violet with opacity - highlight */
   --color-link-hover: #ffbf00; /* Amber - link hover */
   --color-light-font: #36454f; /* Charcoal - font in light mode */
   --color-dark-font: #E5E4E2; /* Platinum - font in dark mode */
@@ -28,6 +29,12 @@
   --font-footer: 'Nunito', sans-serif;
 }
 
+  .mood-positive { color: #4ade80; }
+  .mood-good { color: #a3e635; }
+  .mood-neutral { color: #facc15; }
+  .mood-low { color: #fb923c; }
+  .mood-negative { color: #f87171; }
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -54,6 +61,7 @@ body {
   text-align: center;
   font-family: var(--font-body);
   color: var(--color-light-font);
+  overflow-y: scroll;
 }
 
 body.dark {
@@ -172,16 +180,13 @@ body.dark [data-sonner-toast] [data-title], body.dark [data-sonner-toast] [data-
 }
 
 /* HEADER*/
-header.glass-card {
-  border-radius: 0px;
-}
-
 .HeaderContainer {
   display: flex;
   justify-content: space-around;
   gap: 2rem;
   align-items: center;
   font-family: var(--font-logo);
+  border-radius: 0px
 }
 
 .HeaderContainer p {
@@ -197,17 +202,24 @@ header.glass-card {
 }
 
 .HeaderContainer button {
-    cursor: pointer;
-    background: none;
-    border: none;
-    font-size: 1.8rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
 }
 
 body.dark .HeaderContainer button {
-    color: var(--color-dark-font);
+  color: var(--color-dark-font);
 }
 
 .HeaderContainer button:hover, body.dark .HeaderContainer button:hover {
-    color: var(--color-link-hover);
-    transition: all 0.3s ease-in-out;
+  color: var(--color-link-hover);
+  transition: all 0.3s ease-in-out;
+}
+
+/* MAIN CONTENT */
+.Content {
+  margin: auto;
+  height: auto;
+  max-width: 800px;
 }

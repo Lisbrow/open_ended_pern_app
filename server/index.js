@@ -17,7 +17,7 @@ app.use("/entries", entries);
 // Root route
 app.get("/", async (req, res) => {
   try {
-    const result = await pool.query("SELECT COUNT(*) FROM journal_entries");
+    const result = await pool.query("SELECT COUNT(*) FROM mood_entries");
     const count = parseInt(result.rows[0].count, 10);
 
     res.json({

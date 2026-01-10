@@ -1,91 +1,44 @@
-import React, { useState } from 'react';
-import { moodOptions } from '../MoodSelector/MoodSelector';
+import { useState } from "react";
+import MoodSelector from "../MoodSelector/MoodSelector";
+import { getMoodScore } from "../../utils/moodUtils";
 
-export default function MoodEntryForm({ onAdd }) {
-  const [entryDate, setEntryDate] = useState('');
-  const [mood, setMood] = useState(4);
-  const [feeling, setFeeling] = useState('');
-  const [reflection, setReflection] = useState('');
+export default function MoodEntryForm({ onSave }) {
+  const [moodValue, setMoodValue] = useState(null);
+  const [entryText, setEntryText] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const submitEntry = () => {
+    if (!moodValue) return;
 
-    const newEntry = {
-      entry_date: entryDate,
-      mood: parseInt(mood),
-      feeling,
-      reflection,
-    };
+    onSave({
+      id: crypto.randomUUID(),
+      mood_value: moodValue,
+      mood_score: getMoodScore(moodValue),
+      entry_text: entryText,
+      created_at: new Date().toISOString(),
+    });
 
-    try {
-      const res = await fetch('http://localhost:5000/entries', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newEntry),
-      });
-
-      if (!res.ok) throw new Error('Failed to create entry');
-
-      const created = await res.json();
-      onAdd(created); // pass up to App
-      setEntryDate('');
-      setMood(4);
-      setFeeling('');
-      setReflection('');
-    } catch (err) {
-      console.error(err);
-    }
+    setMoodValue(null);
+    setEntryText("");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Date:{' '}
-        <input
-          type='date'
-          value={entryDate}
-          onChange={(e) => setEntryDate(e.target.value)}
-          required
-        />
-      </label>
-      <br />
-      <label>
-        Mood:{' '}
-        <select
-          value={mood}
-          onChange={(e) => setMood(e.target.value)}
-          required
-        >
-          {moodOptions.map((m) => (
-            <option
-              key={m.value}
-              value={m.value}
-            >
-              {m.label}
-            </option>
-          ))}
-        </select>
-      </label>
-      <br />
-      <label>
-        Feeling:{' '}
-        <input
-          type='text'
-          value={feeling}
-          onChange={(e) => setFeeling(e.target.value)}
-          required
-        />
-      </label>
-      <br />
-      <label>
-        Reflection:{' '}
-        <textarea
-          value={reflection}
-          onChange={(e) => setReflection(e.target.value)}
-        />
-      </label>
-      <br />
-      <button type='submit'>Add Entry</button>
-    </form>
+    <div className="MoodEntryForm">
+      <h2>How are you feeling today?</h2>
+      <MoodSelector value={moodValue} onChange={setMoodValue} />
+
+      <h3>What's on your mind?</h3>
+      <textarea
+        value={entryText}
+        onChange={e => setEntryText(e.target.value)}
+      />
+
+      <button
+        className="PrimaryButton"
+        onClick={submitEntry}
+        disabled={!moodValue}
+      >
+        Save entry
+      </button>
+    </div>
   );
 }

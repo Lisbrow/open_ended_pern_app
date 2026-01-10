@@ -9,9 +9,11 @@
     "@testing-library/user-event": "^13.5.0",
     "motion": "^12.24.10",
     "react": "^19.2.3",
+    "react-calendar": "^6.0.0",
     "react-dom": "^19.2.3",
     "react-icons": "^5.5.0",
     "react-scripts": "5.0.1",
+    "recharts": "^3.6.0",
     "sonner": "^2.0.7",
     "web-vitals": "^2.1.4"
   },

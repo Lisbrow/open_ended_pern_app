@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Toaster, toast } from 'sonner';
-import { motion } from "motion/react";
-import { FaSmileBeam, FaMoon, FaSun } from "react-icons/fa";
+import { motion, AnimatePresence } from 'motion/react';
+import { FaSmileBeam, FaMoon, FaSun } from 'react-icons/fa';
+import Tabs from './components/Tabs/Tabs';
 import MoodEntryForm from './components/MoodEntryForm/MoodEntryForm';
 import MoodHistory from './components/MoodHistory/MoodHistory';
-import { moodOptions } from './components/MoodSelector/MoodSelector';
+import MoodInsights from './components/MoodInsights/MoodInsights';
 import './App.css';
 
 const api = 'http://localhost:5000/entries';
 
 function App() {
   const [entries, setEntries] = useState([]);
+  const [activeTab, setActiveTab] = useState('today');
+  const [highlightedEntryId, setHighlightedEntryId] = useState(null);
   const [filterMood, setFilterMood] = useState('');
   const [isDark, setIsDark] = useState(false);
 
@@ -31,22 +34,37 @@ function App() {
     fetchEntries();
 
     // Check system dark mode preference
-    const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const isDarkMode = window.matchMedia(
+      '(prefers-color-scheme: dark)'
+    ).matches;
     setIsDark(isDarkMode);
     if (isDarkMode) {
-      document.body.classList.add("dark");
+      document.body.classList.add('dark');
     }
   }, []);
 
-  // ADD Entry
-  const handleAdd = (entry) => {
+  // SAVE Entry
+  const handleSave = async (entry) => {
     try {
-      setEntries([entry, ...entries]);
+      const res = await fetch(api, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(entry),
+      });
 
-      // Notification
+      if (!res.ok) throw new Error('Failed to save entry');
+
+      const savedEntry = await res.json();
+
+      setEntries((prev) => [savedEntry, ...prev]);
+
       toast.success('Entry saved!', {
         description: 'Your mood has been recorded.',
       });
+
+      setActiveTab('history');
     } catch (err) {
       console.error(err);
       toast.error('Could not save entry');
@@ -86,10 +104,16 @@ function App() {
     setEntries(sorted);
   };
 
+  // EMOJI click in calendar
+  const handleEmojiClick = (entry) => {
+    setActiveTab('history');
+    setHighlightedEntryId(entry.id);
+  };
+
   // TOGGLE Dark Mode
   const toggleDarkMode = () => {
     setIsDark(!isDark);
-    document.body.classList.toggle("dark");
+    document.body.classList.toggle('dark');
   };
 
   return (
@@ -101,55 +125,88 @@ function App() {
       <Toaster />
 
       {/* HEADER */}
-      <motion.header 
+      <motion.header
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className='glass-card'
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+        className='glass-card HeaderContainer'
       >
-        <div className='HeaderContainer'>
-          <div className='HeaderLogo'>
-          <h1><FaSmileBeam className='LogoIcon' /> Mood Ledger</h1>
+        <div className='HeaderLogo'>
+          <h1>
+            <FaSmileBeam className='LogoIcon' /> Mood Ledger
+          </h1>
           <p>mood by mood, day by day</p>
-          </div>
-          <button
-            className='DarkModeToggleIcon'
-            onClick={toggleDarkMode}
-            aria-label='Toggle Dark Mode'
-          >
-            {isDark ? <FaSun /> : <FaMoon />}
-          </button>
         </div>
+        <button
+          className='DarkModeToggleIcon'
+          onClick={toggleDarkMode}
+          aria-label='Toggle Dark Mode'
+        >
+          {isDark ? <FaSun /> : <FaMoon />}
+        </button>
       </motion.header>
 
-      <h2>Add New Entry</h2>
-      <MoodEntryForm onAdd={handleAdd} />
+      {/* TABS */}
+      <Tabs
+        activeTab={activeTab}
+        onChange={(tab) => {
+          setActiveTab(tab);
 
-      <h2>Filter by Mood</h2>
-      <select
-        value={filterMood}
-        onChange={handleFilterChange}
-      >
-        <option value=''>All</option>
-        {moodOptions.map((m) => (
-          <option
-            key={m.value}
-            value={m.value}
-          >
-            {m.label}
-          </option>
-        ))}
-      </select>
-
-      <h2>Entries</h2>
-      <div>
-        <button onClick={() => handleSort('asc')}>Sort Oldest → Newest</button>
-        <button onClick={() => handleSort('desc')}>Sort Newest → Oldest</button>
-      </div>
-      <MoodHistory
-        entries={entries}
-        onDelete={handleDelete}
+          // Reset highlight when tab is manually switched
+          if (tab !== 'history') {
+            setHighlightedEntryId(null);
+          }
+        }}
       />
+
+      {/* MAIN CONTENT */}
+      <AnimatePresence mode='wait'>
+        {activeTab === 'today' && (
+          <motion.div
+            key='today'
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+            className='Content glass-card'
+          >
+            <MoodEntryForm onSave={handleSave} />
+          </motion.div>
+        )}
+
+        {activeTab === 'history' && (
+          <motion.div
+            key='history'
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+            className='Content glass-card'
+          >
+            <MoodHistory
+              entries={entries}
+              onDelete={handleDelete}
+              highlightedEntryId={highlightedEntryId}
+            />
+          </motion.div>
+        )}
+
+        {activeTab === 'insights' && (
+          <motion.div
+            key='insights'
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+            className='Content glass-card'
+          >
+            <MoodInsights
+              entries={entries}
+              onEmojiClick={handleEmojiClick}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
