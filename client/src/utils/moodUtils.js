@@ -51,6 +51,12 @@ export function getMoodScore(value) {
   return getMoodOption(value)?.score ?? 3;
 }
 
+export function getMoodCategory(score) {
+  if (score >= 4) return 'positive';
+  if (score <= 2) return 'negative';
+  return 'neutral';
+}
+
 export function moodToEmoji(avg) {
   if (avg >= 4.5) return '😄 Very Positive'; // very positive
   if (avg >= 3.5) return '😊 Positive'; // positive

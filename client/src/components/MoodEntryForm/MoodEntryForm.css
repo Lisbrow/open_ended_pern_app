@@ -1,0 +1,45 @@
+.MoodEntryForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+  padding: 1rem;
+  justify-content: center;
+}
+
+.MoodEntryFormInputs {
+  margin: 0 auto;
+  width: 100%;
+  padding: 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.MoodEntryFormInputs h3 {
+  margin-bottom: 0.5rem;
+}
+
+.MoodEntryForm textarea {
+  width: 100%;
+  height: 80px;
+  padding: 0.5rem;
+  border: 1px solid var(--color-light-border);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  resize: vertical;
+}
+
+.SaveButton {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-accent);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}

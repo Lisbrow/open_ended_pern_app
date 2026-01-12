@@ -2,41 +2,37 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  max-width: calc(5 * 3.75rem + 4 * 0.75rem);
+  max-width: calc(5 * 6rem + 4 * 0.75rem);
   margin: 0 auto;
+  justify-content: center;
 }
 
-/*  */
+/* MOOD TILE */
 .MoodOption {
-  width: 3.75rem;
-  height: 3.75rem;
+  width: 6rem;
+  height: 5rem;
   border-radius: 18px;
   padding: 0.4rem;
-
-  background: var(--glass-bg);
-  border: 1px solid transparent;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   cursor: pointer;
   transition: border-color 0.2s ease;
 }
 
 .MoodOption.active {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 35%, transparent);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px var(--color-highlight);
 }
 
 .MoodOption .emoji {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   line-height: 1;
 }
 
 .MoodOption .label {
-  font-size: 0.6rem;
-  opacity: 0.65;
-  margin-top: 0.15rem;
+  margin-top: 0.3rem;
+  font-weight: 500;
+  font-size: 0.9rem;
 }

@@ -35,17 +35,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition:
-    background 0.2s ease,
-    border 0.2s ease,
-    box-shadow 0.2s ease;
 }
 
 /* TODAY — border-based indicator */
-.CalendarCell.today {
-  border: 2px solid #FFD700;
-  box-shadow: 0 0 6px rgba(255, 215, 0, 0.45);
-  background: rgba(255, 215, 0, 0.08);
+.CalendarCell.today, body.dark .CalendarCell.today {
+  border: 2px solid var(--color-accent);
+  box-shadow: 0 0 6px var(--color-accent);
+  background: var(--color-highlight);
 }
 
 /* Date */

@@ -1,13 +1,18 @@
 import { useState } from "react";
+import { toast } from "sonner";
 import MoodSelector from "../MoodSelector/MoodSelector";
 import { getMoodScore } from "../../utils/moodUtils";
+import "./MoodEntryForm.css";
 
 export default function MoodEntryForm({ onSave }) {
   const [moodValue, setMoodValue] = useState(null);
   const [entryText, setEntryText] = useState("");
 
   const submitEntry = () => {
-    if (!moodValue) return;
+    if (!moodValue) {
+      toast.error("Please select a mood before saving!");
+      return;
+    }
 
     onSave({
       id: crypto.randomUUID(),
@@ -17,6 +22,7 @@ export default function MoodEntryForm({ onSave }) {
       created_at: new Date().toISOString(),
     });
 
+    // Clear form after save
     setMoodValue(null);
     setEntryText("");
   };
@@ -26,19 +32,21 @@ export default function MoodEntryForm({ onSave }) {
       <h2>How are you feeling today?</h2>
       <MoodSelector value={moodValue} onChange={setMoodValue} />
 
-      <h3>What's on your mind?</h3>
-      <textarea
-        value={entryText}
-        onChange={e => setEntryText(e.target.value)}
-      />
+      <div className="MoodEntryFormInputs">
+        <h3>What's on your mind?</h3>
+        <textarea
+          value={entryText}
+          onChange={(e) => setEntryText(e.target.value)}
+          placeholder="Write a note (optional)"
+        />
 
-      <button
-        className="PrimaryButton"
-        onClick={submitEntry}
-        disabled={!moodValue}
-      >
-        Save entry
-      </button>
+        <button
+          className="SaveButton"
+          onClick={submitEntry}
+        >
+          Save entry
+        </button>
+      </div>
     </div>
   );
 }

@@ -22,7 +22,6 @@
   border-radius: 999px;
   background: transparent;
   cursor: pointer;
-  font-family: var(--font-header);
 }
 
 body.dark .TabPill {
@@ -41,7 +40,12 @@ body.dark .TabPill {
   z-index: -1;
 }
 
+.TabPill span {
+  font-family: var(--font-header);
+  font-size: 1rem;
+}
+
 .TabPill span.active {
-  color: white;
+  color: #FFFFFF;
   font-weight: 600;
 }

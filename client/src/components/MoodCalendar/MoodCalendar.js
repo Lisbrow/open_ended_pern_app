@@ -55,7 +55,7 @@ function MoodCalendar({ entriesByDay = {}, onEmojiClick }) {
           return (
             <div
               key={dayKey}
-              className={`CalendarCell ${isToday ? 'today' : ''}`}
+              className={`CalendarCell glass-card ${isToday ? 'today' : ''}`}
             >
               <div className="CalendarDate">
                 {dateObj.getDate()}

@@ -7,6 +7,10 @@
   --color-dark-font: #E5E4E2; /* Platinum - font in dark mode */
   --color-sub-font: #848884; /* Smoke - subtext */
 
+  --color-mood-positive: #E3963E; /* Butterscotch */
+  --color-mood-neutral: #899499; /* Pewter */ 
+  --color-mood-negative: #0F52BA; /* Sapphire Blue */
+
   /* GLASS GRADIENTS */
   --glass-light-top: rgba(255, 255, 255, 0.5);
   --glass-light-bottom: rgba(255, 255, 255, 0.3);
@@ -28,12 +32,6 @@
   --font-body: 'Figtree', sans-serif;
   --font-footer: 'Nunito', sans-serif;
 }
-
-  .mood-positive { color: #4ade80; }
-  .mood-good { color: #a3e635; }
-  .mood-neutral { color: #facc15; }
-  .mood-low { color: #fb923c; }
-  .mood-negative { color: #f87171; }
 
 * {
   box-sizing: border-box;
@@ -58,13 +56,26 @@ html {
 }
 
 body {
-  text-align: center;
+  overflow-y: scroll;
   font-family: var(--font-body);
   color: var(--color-light-font);
-  overflow-y: scroll;
+  text-align: center;
+  padding-bottom: 2rem;
 }
 
 body.dark {
+  color: var(--color-dark-font);
+}
+
+h2, h3, h4, h5, h6, button {
+  font-family: var(--font-header);
+}
+
+span {
+  font-family: var(--font-body);
+}
+
+body.dark span {
   color: var(--color-dark-font);
 }
 

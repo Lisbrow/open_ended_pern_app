@@ -1,77 +1,83 @@
-/* History Header */
-.HistoryTitle {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-/* List container */
 .HistoryList {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  max-height: 400px;
+  gap: 0.8rem;
   overflow-y: auto;
 }
 
-/* Individual history card */
+.HistoryCardContainer {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  z-index: 0;
+}
+
+.HistoryCardContainer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: var(--color-highlight);
+  opacity: 0;
+  transition: opacity 1s ease-out;
+  pointer-events: none; /* so it doesn’t block clicks */
+  z-index: -1; 
+}
+
+.HistoryCardContainer.highlighted::before {
+  opacity: 1;
+}
+
 .HistoryCard {
   display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-  border: 1px solid #ddd;
-  padding: 0.5rem;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 0.5rem;
-  transition: box-shadow 0.3s, border 0.3s;
+  align-items: center;
+  justify-content: space-between;
+  align-content: center;
+  width: 100%;
 }
 
-/* Highlighted entry */
-.HistoryCard.highlighted {
-  border: 2px solid #FFD700;
-  box-shadow: 0 0 8px 3px #FFD700;
-  transition: box-shadow 0.4s, border 0.4s;
-}
-
-/* Emoji section */
 .HistoryEmoji {
   font-size: 2rem;
-  line-height: 1;
+  padding-right: 1rem;
 }
 
-/* Text content */
+.HistoryLabel.positive {
+  color: var(--color-mood-positive);
+}
+
+.HistoryLabel.neutral {
+  color: var(--color-mood-neutral);
+}
+
+.HistoryLabel.negative {
+  color: var(--color-mood-negative);
+}
+
 .HistoryText {
-  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   text-align: left;
 }
 
-/* Meta info (date, etc.) */
-.HistoryMeta {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.85rem;
-  color: var(--color-sub-font);
-}
-
-/* Note / extra text */
-.HistoryNote {
+.EntryText {
   margin-top: 0.25rem;
-  font-size: 0.85rem;
-  color: var(--color-sub-font);
 }
 
-/* Delete button */
 .DeleteButton {
+  display: flex;
+  justify-content: center;
+  padding-left: 1rem;
+  font-size: 1.5rem;
   opacity: 0;
   background: none;
   border: none;
   cursor: pointer;
-  color: #f87171;
+  color: var(--color-accent);
   transition: opacity 0.2s ease;
 }
 
-.HistoryCard:hover .DeleteButton {
+.HistoryCardContainer:hover .DeleteButton {
   opacity: 1;
 }

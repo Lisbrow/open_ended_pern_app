@@ -12,7 +12,7 @@ export default function MoodSelector({ value, onChange }) {
           <motion.button
             key={mood.value}
             type="button"
-            className={`MoodOption ${isActive ? "active" : ""}`}
+            className={`MoodOption glass-card ${isActive ? "active" : ""}`}
             onClick={() => onChange(mood.value)}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

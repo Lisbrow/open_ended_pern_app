@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
-import { getMoodEmoji, getMoodLabel } from '../../utils/moodUtils';
+import { FaTrash } from "react-icons/fa";
+import { getMoodEmoji, getMoodLabel, getMoodCategory } from '../../utils/moodUtils';
 import './MoodHistory.css';
 
 function MoodHistory({ entries = [], onDelete, highlightedEntryId }) {
@@ -24,25 +25,46 @@ function MoodHistory({ entries = [], onDelete, highlightedEntryId }) {
 
   return (
     <div className="History">
-      <h2>Your Journey</h2>
-      <div className="HistoryList">
-        {entries.map((entry) => (
-          <motion.div
-            key={entry.id}
-            ref={(el) => (entryRefs.current[entry.id] = el)}
-            className="HistoryCard"
-          >
-            <div className="HistoryItemInner">
-              <div className="HistoryEmoji">{getMoodEmoji(entry.mood_value)}</div>
-              <div className="HistoryText">
-                <div className="HistoryLabel">{getMoodLabel(entry.mood_value)}</div>
-                {entry.entry_text && <p className="HistoryNote">{entry.entry_text}</p>}
+      {entries.length === 0 ? (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4 }}
+          className="glass-card Content"
+          style={{ padding: '2.5rem', textAlign: 'center' }}
+        >
+          <div style={{ fontSize: '2rem', paddingBottom: '1rem' }}>✨</div>
+          <h3>No entries yet</h3>
+          <p className="subtext">
+            Start tracking your mood to see your history here
+          </p>
+        </motion.div>
+      ) : (
+        <div className="HistoryList">
+          {entries.map((entry) => (
+            <motion.div
+              key={entry.id}
+              ref={(el) => (entryRefs.current[entry.id] = el)}
+              className="HistoryCardContainer glass-card"
+            >
+              <div className="HistoryCard">
+                <div className="HistoryEmoji">{getMoodEmoji(entry.mood_value)}</div>
+                <div className="HistoryText">
+                  <h4
+                    className={`HistoryLabel ${getMoodCategory(entry.mood_score)}`}
+                  >
+                    {getMoodLabel(entry.mood_value)}
+                  </h4>
+                  {entry.entry_text && <p className="EntryText">{entry.entry_text}</p>}
+                </div>
+                <button className="DeleteButton" onClick={() => onDelete(entry.id)}>
+                  <FaTrash />
+                </button>
               </div>
-              <button className="DeleteButton" onClick={() => onDelete(entry.id)}>Delete</button>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+            </motion.div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
