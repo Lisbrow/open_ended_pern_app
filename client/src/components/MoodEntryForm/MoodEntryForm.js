@@ -8,12 +8,15 @@ export default function MoodEntryForm({ onSave }) {
   const [moodValue, setMoodValue] = useState(null);
   const [entryText, setEntryText] = useState("");
 
+  // SUBMIT entry
   const submitEntry = () => {
+    // Error message if no mood selected
     if (!moodValue) {
       toast.error("Please select a mood before saving!");
       return;
     }
 
+    // Call onSave prop with new entry data
     onSave({
       id: crypto.randomUUID(),
       mood_value: moodValue,
@@ -28,10 +31,14 @@ export default function MoodEntryForm({ onSave }) {
   };
 
   return (
+    // MOOD ENTRY FORM
     <div className="MoodEntryForm">
       <h2>How are you feeling today?</h2>
+      
+      {/* MOOD SELECTION GRID */}
       <MoodSelector value={moodValue} onChange={setMoodValue} />
 
+      {/* TEXTAREA AND SAVE BUTTON */}
       <div className="MoodEntryFormInputs">
         <h3>What's on your mind?</h3>
         <textarea

@@ -14,7 +14,6 @@ function App() {
   const [entries, setEntries] = useState([]);
   const [activeTab, setActiveTab] = useState('today');
   const [highlightedEntryId, setHighlightedEntryId] = useState(null);
-  const [filterMood, setFilterMood] = useState('');
   const [isDark, setIsDark] = useState(false);
 
   const fetchEntries = async (mood = '') => {
@@ -88,22 +87,6 @@ function App() {
     }
   };
 
-  // FILTER by mood
-  const handleFilterChange = (e) => {
-    setFilterMood(e.target.value);
-    fetchEntries(e.target.value);
-  };
-
-  // SORT desc or asc
-  const handleSort = (order) => {
-    const sorted = [...entries].sort((a, b) => {
-      const dateA = new Date(a.entry_date);
-      const dateB = new Date(b.entry_date);
-      return order === 'asc' ? dateA - dateB : dateB - dateA;
-    });
-    setEntries(sorted);
-  };
-
   // EMOJI click in calendar
   const handleEmojiClick = (entry) => {
     setActiveTab('history');
@@ -118,6 +101,7 @@ function App() {
 
   return (
     <div className='App'>
+
       {/* BACKGROUND with overlay */}
       <div className='Background'>
         <div className='BackgroundOverlay' />
@@ -151,7 +135,6 @@ function App() {
         activeTab={activeTab}
         onChange={(tab) => {
           setActiveTab(tab);
-
           // Reset highlight when tab is manually switched
           if (tab !== 'history') {
             setHighlightedEntryId(null);
@@ -161,7 +144,10 @@ function App() {
 
       {/* MAIN CONTENT */}
       <AnimatePresence mode='wait'>
+
+        {/* TODAY CONTENT */}
         {activeTab === 'today' && (
+          // Fade in/out animation for today content
           <motion.div
             key='today'
             initial={{ opacity: 0, y: 20 }}
@@ -174,7 +160,9 @@ function App() {
           </motion.div>
         )}
 
+        {/* HISTORY CONTENT */}
         {activeTab === 'history' && (
+          // Fade in/out animation for history content
           <motion.div
             key='history'
             initial={{ opacity: 0, y: 20 }}
@@ -191,7 +179,9 @@ function App() {
           </motion.div>
         )}
 
+        {/* INSIGHTS CONTENT */}
         {activeTab === 'insights' && (
+          // Fade in/out animation for insights content
           <motion.div
             key='insights'
             initial={{ opacity: 0, y: 20 }}

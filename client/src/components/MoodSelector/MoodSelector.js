@@ -4,11 +4,13 @@ import { moodOptions } from "../../utils/moodUtils";
 
 export default function MoodSelector({ value, onChange }) {
   return (
+    // EMOJI MOOD GRID
     <div className="MoodGrid">
       {moodOptions.map((mood) => {
         const isActive = value === mood.value;
 
         return (
+          // EMOJI MOOD BUTTON WITH ANIMATION
           <motion.button
             key={mood.value}
             type="button"
@@ -19,6 +21,7 @@ export default function MoodSelector({ value, onChange }) {
             animate={{ scale: isActive ? 1.1 : 1 }}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
           >
+            {/* EMOJI AND LABEL */}
             <span className="emoji">{mood.emoji}</span>
             <span className="label">{mood.label}</span>
           </motion.button>

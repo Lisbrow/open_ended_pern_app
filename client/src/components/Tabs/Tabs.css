@@ -1,16 +1,18 @@
-.Tabs {
+.TabsContainer {
   margin: 1.5rem auto;
   padding: 0.25rem !important;
   display: inline-block;
 }
 
-.TabsInner {
+/* TAB MENU */
+.Tabs {
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, auto);
   gap: 0.5rem;
 }
 
+/* COLORED TAB PILL */
 .TabPill {
   position: relative;
   z-index: 1;
@@ -40,6 +42,7 @@ body.dark .TabPill {
   z-index: -1;
 }
 
+/* TAB TEXT */
 .TabPill span {
   font-family: var(--font-header);
   font-size: 1rem;

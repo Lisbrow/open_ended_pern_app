@@ -4,7 +4,7 @@
   font-size: 0.9rem;
 }
 
-/* Header */
+/* WEEKDAY HEADERS */
 .CalendarHeader {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -18,52 +18,52 @@
   padding-bottom: 0.25rem;
 }
 
-/* Grid */
+/* CALENDAR GRID */
 .CalendarGrid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 0.35rem;
 }
 
-/* Cell */
+/* CALENDAR CELL */
 .CalendarCell {
-  min-height: 88px;
-  padding: 0.4rem;
-  border-radius: 0.5rem;
-  background: rgba(255, 255, 255, 0.35);
-  border: 1px solid transparent;
+  min-height: 5rem;
+  padding: 0.5rem !important;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
-/* TODAY — border-based indicator */
+/* TODAY HIGHLIGHT */
 .CalendarCell.today, body.dark .CalendarCell.today {
   border: 2px solid var(--color-accent);
   box-shadow: 0 0 6px var(--color-accent);
   background: var(--color-highlight);
 }
 
-/* Date */
 .CalendarDate {
   font-size: 0.8rem;
   font-weight: 600;
-  margin-bottom: 0.25rem;
+  margin: 0.25rem;
 }
 
-/* Emojis */
-.CalendarEmojis {
+.CalendarEmojisContainer {
+  width: 100%;
+  height: 100%;
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   gap: 0.15rem;
+  align-items: center;
   justify-content: center;
+  justify-items: center;
 }
 
 .CalendarEmoji {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   line-height: 1;
   padding: 0;
   transition: transform 0.15s ease;

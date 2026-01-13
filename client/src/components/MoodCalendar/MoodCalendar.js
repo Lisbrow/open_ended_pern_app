@@ -3,6 +3,7 @@ import './MoodCalendar.css';
 
 const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+// Check if two dates are the same day
 function isSameDay(a, b) {
   return (
     a.getFullYear() === b.getFullYear() &&
@@ -30,6 +31,8 @@ function getLastFourWeeks() {
   return days;
 }
 
+
+// MOOD CALENDAR COMPONENT
 function MoodCalendar({ entriesByDay = {}, onEmojiClick }) {
   const today = new Date();
   const days = getLastFourWeeks();
@@ -53,16 +56,20 @@ function MoodCalendar({ entriesByDay = {}, onEmojiClick }) {
           const isToday = isSameDay(dateObj, today);
 
           return (
+            // CALENDAR CELL
             <div
               key={dayKey}
               className={`CalendarCell glass-card ${isToday ? 'today' : ''}`}
             >
+              {/* CALENDAR DATE */}
               <div className="CalendarDate">
                 {dateObj.getDate()}
               </div>
 
-              <div className="CalendarEmojis">
+              {/* EMOJIS FOR THE DAY */}
+              <div className="CalendarEmojisContainer">
                 {(dayData?.entries || []).map((entry) => (
+                  // Emoji button to view entry in history
                   <button
                     key={entry.id}
                     className="CalendarEmoji"

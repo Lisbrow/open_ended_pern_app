@@ -19,23 +19,11 @@ function MoodInsights({ entries, onEmojiClick }) {
   if (!entries?.length) return null;
 
   return (
-    <div className="MoodInsights">
-      <h2>Insights</h2>
-
-      <div className="InsightRow">
-        <div className="InsightCard">
-          🔥 <strong>{streaks.current}</strong> day streak
-        </div>
-        <div className="InsightCard">
-          💛 Most common:
-          {commonMoods.map((m) => (
-            <span key={m.mood} className="CommonMood">
-              {getMoodEmoji(m.mood)} {getMoodLabel(m.mood)} × {m.count}
-            </span>
-          ))}
-        </div>
+    <div className="MoodInsightsContainer">
+      <div className="MoodInsights">
+        <p className="Streaks">🔥 <strong>{streaks.current}</strong> day streak</p>
       </div>
-
+      
       <MoodCalendar
         entriesByDay={entriesByDay}
         onEmojiClick={onEmojiClick}
