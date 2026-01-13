@@ -56,11 +56,3 @@ export function getMoodCategory(score) {
   if (score <= 2) return 'negative';
   return 'neutral';
 }
-
-export function moodToEmoji(avg) {
-  if (avg >= 4.5) return '😄 Very Positive'; // very positive
-  if (avg >= 3.5) return '😊 Positive'; // positive
-  if (avg >= 2.5) return '😐 Neutral'; // neutral
-  if (avg >= 1.5) return '😕 Low'; // low
-  return '😞 Very Low'; // very low
-}

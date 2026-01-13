@@ -1,6 +1,5 @@
 import { useMemo } from "react";
-import { groupEntriesByDay, calculateStreaks, getMostCommonMoods } from "../../utils/insightUtils";
-import { getMoodEmoji, getMoodLabel } from "../../utils/moodUtils";
+import { groupEntriesByDay, calculateStreaks } from "../../utils/insightUtils";
 
 import MoodCalendar from "../MoodCalendar/MoodCalendar";
 
@@ -14,7 +13,6 @@ function MoodInsights({ entries, onEmojiClick }) {
 
   const entriesByDay = useMemo(() => groupEntriesByDay(recentEntries), [recentEntries]);
   const streaks = useMemo(() => calculateStreaks(entries), [entries]);
-  const commonMoods = useMemo(() => getMostCommonMoods(entries), [entries]);
 
   if (!entries?.length) return null;
 

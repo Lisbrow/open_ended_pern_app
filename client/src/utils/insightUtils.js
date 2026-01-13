@@ -1,10 +1,4 @@
-// insightUtils.js
-
-import { getMoodScore } from "./moodUtils";
-
-/**
- * Group entries by day (YYYY-MM-DD)
- */
+// Group entries by day
 export function groupEntriesByDay(entries) {
   return entries.reduce((acc, entry) => {
     const day = entry.created_at.slice(0, 10);
@@ -21,9 +15,8 @@ export function groupEntriesByDay(entries) {
   }, {});
 }
 
-/**
- * Calculate current and longest streak (consecutive days with entries)
- */
+
+// Calculate current and longest streak (consecutive days with entries)
 export function calculateStreaks(entries) {
   if (!entries.length) return { current: 0, longest: 0 };
 
@@ -48,24 +41,7 @@ export function calculateStreaks(entries) {
   return { current, longest };
 }
 
-/**
- * Most common moods
- */
-export function getMostCommonMoods(entries, limit = 3) {
-  const counts = {};
-  entries.forEach((e) => {
-    counts[e.mood_value] = (counts[e.mood_value] || 0) + 1;
-  });
-
-  return Object.entries(counts)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, limit)
-    .map(([mood, count]) => ({ mood, count }));
-}
-
-/**
- * Day color classification
- */
+// Color by mood score
 export function getDaySentiment(score) {
   if (score >= 4) return "positive";
   if (score === 3) return "neutral";
