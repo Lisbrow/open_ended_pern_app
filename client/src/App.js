@@ -8,7 +8,7 @@ import MoodHistory from './components/MoodHistory/MoodHistory';
 import MoodInsights from './components/MoodInsights/MoodInsights';
 import './App.css';
 
-const api = 'http://localhost:5000/entries';
+const api = 'https://open-ended-pern-app-backend.onrender.com/entries';
 
 function App() {
   const [entries, setEntries] = useState([]);

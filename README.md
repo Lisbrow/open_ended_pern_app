@@ -75,11 +75,7 @@ Before you begin, ensure you have the following:
 4. (Optional) Create a `.env` file in the `server` directory:
     ```env
     PORT=5000
-    DB_USER=your_postgres_username
-    DB_HOST=your_postgres_host
-    DB_NAME=your_postgres_database_name
-    DB_PASSWORD=your_postgres_password
-    DB_PORT=your_postgres_port
+    DATABASE_URL=your_postgres_connection_string
     ```
 
 5. Start the backend server:
