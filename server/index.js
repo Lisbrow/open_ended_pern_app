@@ -4,28 +4,22 @@ import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 
+dotenv.config();
+
 import { pool } from "./db.js";
 import entries from "./routes/entries.js";
-
-dotenv.config();
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(
-  cors({
-    origin: "*",
-    credentials: true,
-  })
-);
-
+app.use(cors());
 app.use(express.json());
 
 // API routes
 app.use("/entries", entries);
 
-// Root health check
+// Health/root check
 app.get("/", async (req, res) => {
   try {
     const result = await pool.query("SELECT COUNT(*) FROM mood_entries");
@@ -41,16 +35,16 @@ app.get("/", async (req, res) => {
   }
 });
 
-// Serve React frontend in production
+// Serve frontend in production
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
 
-  app.get("/*", (req, res) => {
+  // ES module friendly catch-all
+  app.get(/.*/, (req, res) => {
     res.sendFile(path.join(__dirname, "../client/build", "index.html"));
   });
 }
 
-// Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Mood Ledger API running on port ${PORT}`);
