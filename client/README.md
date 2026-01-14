@@ -1,70 +1,141 @@
-# Getting Started with Create React App
+# Mood Ledger
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Preview](moodLedgerScreenshot.png)
 
-## Available Scripts
+Mood Ledger is a full-stack PERN (PostgreSQL, Express, React, Node.js) web application that allows users to log daily moods, add optional reflections, and track emotional trends over time.
 
-In the project directory, you can run:
+## Table of Contents
+- [Mood Ledger](#mood-ledger)
+  - [Table of Contents](#table-of-contents)
+  - [Purpose](#purpose)
+  - [Features](#features)
+  - [Technologies](#technologies)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+  - [Usage](#usage)
+  - [Testing](#testing)
+    - [Frontend](#frontend)
+    - [Backend](#backend)
+  - [Deployment](#deployment)
+  - [Future Work](#future-work)
+  - [Acknowledgements](#acknowledgements)
 
-### `npm start`
+## Purpose
+This project was developed as a full-stack open-ended PERN application to practice building and integrating a RESTful backend with a modern React frontend. The primary goal was to create a simple, intuitive mood-tracking tool while demonstrating state management, component-driven UI design, database integration, and automated testing.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Features
+- Emoji-based mood selection with clear visual feedback
+- Optional text reflections for each mood entry
+- Automatic mood categorization (positive, neutral, negative)
+- Mood history list with delete functionality
+- Calendar view showing mood entries by date
+- Persistent data storage using PostgreSQL
+- Frontend and backend test coverage using Jest and React Testing Library
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies
+- PostgreSQL
+- Express.js
+- React.js
+- Node.js
+- JavaScript
+- HTML
+- CSS
+- Jest
+- React Testing Library
 
-### `npm test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
+Before you begin, ensure you have the following:
+- Node.js installed on your machine
+- npm
+- PostgreSQL (local or hosted)
+- Git
 
-### `npm run build`
+### Installation
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/Lisbrow/open_ended_pern_app.git
+    cd mood-ledger-app
+    ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Install backend dependencies:
+    ```bash
+    cd server
+    npm install
+    ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Install frontend dependencies:
+    ```bash
+    cd ../client
+    npm install
+    ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. (Optional) Create a `.env` file in the `server` directory:
+    ```env
+    PORT=5000
+    DB_USER=your_postgres_username
+    DB_HOST=your_postgres_host
+    DB_NAME=your_postgres_database_name
+    DB_PASSWORD=your_postgres_password
+    DB_PORT=your_postgres_port
+    ```
 
-### `npm run eject`
+5. Start the backend server:
+    ```bash
+    cd server
+    npm start
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+6. Start the frontend development server:
+    ```bash
+    cd client
+    npm start
+    ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Usage
+1. Open your browser and navigate to `http://localhost:3000` to view the app locally.
+2. Select a mood using the emoji-based mood grid.
+3. Optionally write a short note describing how you feel.
+4. Click "Save Entry" to log your mood.
+5. View previous entries in the mood history list or calendar view.
+6. Delete entries as needed using the trash icon.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Testing
+The project includes automated tests for both the frontend and backend to ensure stability and maintainability.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Frontend
+- **Framework:** Jest + React Testing Library  
+- Run tests with coverage:
+    ```bash
+    cd client
+    npm test -- --coverage
+    ```
+- This will test React components, utility functions, and simulate user interactions.
 
-## Learn More
+### Backend
+- **Framework:** Jest + Supertest  
+- Run backend tests:
+    ```bash
+    cd server
+    npm test
+    ```
+- This will test API routes, database operations, and server logic.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Deployment
+Mood Ledger is deployed to [Render](https://render.com/) for live access.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Future Work
+- User authentication and individual user accounts
+- Mood analytics and trend visualization
+- Filters for viewing mood history by category or date range
+- Mobile-first UI enhancements
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Acknowledgements
+- [React](https://reactjs.org/)
+- [Express](https://expressjs.com/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Jest](https://jestjs.io/)
+- [React Testing Library](https://testing-library.com/)
+- [Render](https://render.com/)
