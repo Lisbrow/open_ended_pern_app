@@ -3,22 +3,29 @@ import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
-dotenv.config();
 
 import { pool } from "./db.js";
 import entries from "./routes/entries.js";
+
+dotenv.config();
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
-// Use the entries router
+// API routes
 app.use("/entries", entries);
 
-// Root route
+// Root health check
 app.get("/", async (req, res) => {
   try {
     const result = await pool.query("SELECT COUNT(*) FROM mood_entries");
@@ -34,11 +41,11 @@ app.get("/", async (req, res) => {
   }
 });
 
-// Serve static assets in production
+// Serve React frontend in production
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
 
-  app.get("*", (req, res) => {
+  app.get("/*", (req, res) => {
     res.sendFile(path.join(__dirname, "../client/build", "index.html"));
   });
 }
