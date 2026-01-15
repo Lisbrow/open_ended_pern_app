@@ -91,7 +91,7 @@ Before you begin, ensure you have the following:
     ```
 
 ## Usage
-1. Open your browser and navigate to `http://localhost:3000` to view the app locally.
+1. Open your browser and navigate to `http://localhost:3000` to view the app locally or visit `https://open-ended-pern-app-frontend.onrender.com/` to view the live demo.
 2. Select a mood using the emoji-based mood grid.
 3. Optionally write a short note describing how you feel.
 4. Click "Save Entry" to log your mood.
@@ -120,7 +120,7 @@ The project includes automated tests for both the frontend and backend to ensure
 - This will test API routes, database operations, and server logic.
 
 ## Deployment
-Mood Ledger is deployed to [Render](https://render.com/) for live access.
+Mood Ledger is deployed to [Render](https://render.com/) for live access. Visit `https://open-ended-pern-app-frontend.onrender.com/` to view the live demo.
 
 ## Future Work
 - User authentication and individual user accounts
